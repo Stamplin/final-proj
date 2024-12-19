@@ -33,6 +33,12 @@ namespace final_proj
         SoundEffect vocal1, vocal2, vocal3, vocal4;
         SoundEffectInstance vocal1Instance, vocal2Instance, vocal3Instance, vocal4Instance;
 
+        //rect
+        Rectangle keyboardRect = new Rectangle(100, 180, 220, 241);
+        Rectangle guitarRect = new Rectangle(750, 180, 220, 241);
+        Rectangle drumRect = new Rectangle(550, 180, 220, 241);
+        Rectangle vocalRect = new Rectangle(320, 180, 220, 241);
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -103,7 +109,7 @@ namespace final_proj
             guitarTexture = Content.Load<Texture2D>("Charater/guitar/guitarNormal");
             keyboardTexture = Content.Load<Texture2D>("Charater/keyboard/keyNormal");
             vocalTexture = Content.Load<Texture2D>("Charater/vocal/vocalNormal");
-            
+            //Load Dance Charaters
             drumDanceTexture = Content.Load<Texture2D>("Charater/drum/drumDance");
             guitarDanceTexture = Content.Load<Texture2D>("Charater/guitar/guitarDance");
             keyboardDanceTexture = Content.Load<Texture2D>("Charater/keyboard/keyDance");
@@ -153,17 +159,16 @@ namespace final_proj
             _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1079, 600), Color.White);
 
             //load random song to play and test
-            vocal1Instance.Play();
-            guitar2Instance.Play();
-            drum3Instance.Play();
+            vocal4Instance.Play();
+            guitar4Instance.Play();
+            drum4Instance.Play();
             keyboard4Instance.Play();
 
             //load the band members
-
-            _spriteBatch.Draw(drumTexture, new Vector2(100, 0), Color.White);
-            _spriteBatch.Draw(guitarTexture, new Vector2(200, 0), Color.White);
-            _spriteBatch.Draw(keyboardTexture, new Vector2(300, 0), Color.White);
-            _spriteBatch.Draw(vocalTexture, new Vector2(400, 0), Color.White);
+            _spriteBatch.Draw(vocalTexture, vocalRect, Color.White);
+            _spriteBatch.Draw(guitarTexture, guitarRect, Color.White);
+            _spriteBatch.Draw(drumTexture, drumRect, Color.White);
+            _spriteBatch.Draw(keyboardTexture, keyboardRect, Color.White);
 
             _spriteBatch.End();
 
