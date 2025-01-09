@@ -5,11 +5,6 @@ using Microsoft.Xna.Framework.Input;
 
 namespace final_proj
 {
-
-    //Note to self:
-    //add buttons so people can select loops for the songs (when one is pressed the other ones stops so no overlaps)
-    //add like a timer or something to toggle animations for the band members that are active from the normal to the dancing frame.
-    //keybind 1-4 will be used to show the buttons for each loops
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
@@ -165,10 +160,7 @@ namespace final_proj
 
             //load random song to play and test
 
-            vocal2Instance.Play();
-            guitar1Instance.Play();
-            drum1Instance.Play();
-            keyboard1Instance.Play();
+            vocal4Instance.Play();
 
             //load the band members
             _spriteBatch.Draw(vocalTexture, vocalRect, Color.White);

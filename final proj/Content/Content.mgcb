@@ -121,6 +121,23 @@
 /processorParam:TextureFormat=Color
 /build:Charater/vocal/vocalNormal.png
 
+#begin drum.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:drum.png
+
+#begin drums/drum(1),drum(2),drum(3).zip
+/importer:
+/processor:
+/build:drums/drum(1),drum(2),drum(3).zip
+
 #begin drums/drum(1).wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -145,11 +162,35 @@
 /processorParam:Quality=Best
 /build:drums/drum(4).wav
 
+#begin guitar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:guitar.png
+
 #begin guitar/guitar(1).wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:guitar/guitar(1).wav
+
+#begin guitar/guitar(1).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:guitar/guitar(1).wav
+
+#begin guitar/guitar(2).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:guitar/guitar(2).wav
 
 #begin guitar/guitar(2).wav
 /importer:WavImporter
@@ -163,11 +204,41 @@
 /processorParam:Quality=Best
 /build:guitar/guitar(3).wav
 
+#begin guitar/guitar(3).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:guitar/guitar(3).wav
+
 #begin guitar/guitar(4).wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:guitar/guitar(4).wav
+
+#begin guitar/guitar(4).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:guitar/guitar(4).wav
+
+#begin keyboard.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:keyboard.png
+
+#begin keyboard/keyboard(1).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:keyboard/keyboard(1).wav
 
 #begin keyboard/keyboard(1).wav
 /importer:WavImporter
@@ -181,6 +252,18 @@
 /processorParam:Quality=Best
 /build:keyboard/keyboard(2).wav
 
+#begin keyboard/keyboard(2).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:keyboard/keyboard(2).wav
+
+#begin keyboard/keyboard(3).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:keyboard/keyboard(3).wav
+
 #begin keyboard/keyboard(3).wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -192,6 +275,30 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:keyboard/keyboard(4).wav
+
+#begin keyboard/keyboard(4).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:keyboard/keyboard(4).wav
+
+#begin mic.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:mic.png
+
+#begin vocal/vocal(1).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:vocal/vocal(1).wav
 
 #begin vocal/vocal(1).wav
 /importer:WavImporter
@@ -205,6 +312,18 @@
 /processorParam:Quality=Best
 /build:vocal/vocal(2).wav
 
+#begin vocal/vocal(2).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:vocal/vocal(2).wav
+
+#begin vocal/vocal(3).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:vocal/vocal(3).wav
+
 #begin vocal/vocal(3).wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -216,4 +335,76 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:vocal/vocal(4).wav
+
+#begin vocal/vocal(4).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:vocal/vocal(4).wav
+
+#begin X:/My Drive/Downloads/Game Assets/Sounds/drums/drum(1).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:X:/My Drive/Downloads/Game Assets/Sounds/drums/drum(1).wav;drums/drum(1).wav
+
+#begin X:/My Drive/Downloads/Game Assets/Sounds/drums/drum(2).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:X:/My Drive/Downloads/Game Assets/Sounds/drums/drum(2).wav;drums/drum(2).wav
+
+#begin X:/My Drive/Downloads/Game Assets/Sounds/drums/drum(3).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:X:/My Drive/Downloads/Game Assets/Sounds/drums/drum(3).wav;drums/drum(3).wav
+
+#begin X:/My Drive/Downloads/Game Assets/Sounds/drums/drum(4).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:X:/My Drive/Downloads/Game Assets/Sounds/drums/drum(4).wav;drums/drum(4).wav
+
+#begin X:/My Drive/Downloads/Game Assets/Sounds/guitar/guitar(1).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:X:/My Drive/Downloads/Game Assets/Sounds/guitar/guitar(1).wav;guitar/guitar(1).wav
+
+#begin X:/My Drive/Downloads/Game Assets/Sounds/guitar/guitar(2).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:X:/My Drive/Downloads/Game Assets/Sounds/guitar/guitar(2).wav;guitar/guitar(2).wav
+
+#begin X:/My Drive/Downloads/Game Assets/Sounds/guitar/guitar(4).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:X:/My Drive/Downloads/Game Assets/Sounds/guitar/guitar(4).wav;guitar/guitar(4).wav
+
+#begin X:/My Drive/Downloads/Game Assets/Sounds/keyboard/keyboard(1).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:X:/My Drive/Downloads/Game Assets/Sounds/keyboard/keyboard(1).wav;keyboard/keyboard(1).wav
+
+#begin X:/My Drive/Downloads/Game Assets/Sounds/keyboard/keyboard(2).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:X:/My Drive/Downloads/Game Assets/Sounds/keyboard/keyboard(2).wav;keyboard/keyboard(2).wav
+
+#begin X:/My Drive/Downloads/Game Assets/Sounds/keyboard/keyboard(3).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:X:/My Drive/Downloads/Game Assets/Sounds/keyboard/keyboard(3).wav;keyboard/keyboard(3).wav
+
+#begin X:/My Drive/Downloads/Game Assets/Sounds/keyboard/keyboard(4).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:X:/My Drive/Downloads/Game Assets/Sounds/keyboard/keyboard(4).wav;keyboard/keyboard(4).wav
 
