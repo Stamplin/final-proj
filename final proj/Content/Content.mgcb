@@ -133,11 +133,6 @@
 /processorParam:TextureFormat=Color
 /build:drum.png
 
-#begin drums/drum(1),drum(2),drum(3).zip
-/importer:
-/processor:
-/build:drums/drum(1),drum(2),drum(3).zip
-
 #begin drums/drum(1).wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -180,18 +175,6 @@
 /processorParam:Quality=Best
 /build:guitar/guitar(1).wav
 
-#begin guitar/guitar(1).wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:guitar/guitar(1).wav
-
-#begin guitar/guitar(2).wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:guitar/guitar(2).wav
-
 #begin guitar/guitar(2).wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -203,18 +186,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:guitar/guitar(3).wav
-
-#begin guitar/guitar(3).wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:guitar/guitar(3).wav
-
-#begin guitar/guitar(4).wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:guitar/guitar(4).wav
 
 #begin guitar/guitar(4).wav
 /importer:WavImporter
@@ -240,18 +211,6 @@
 /processorParam:Quality=Best
 /build:keyboard/keyboard(1).wav
 
-#begin keyboard/keyboard(1).wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:keyboard/keyboard(1).wav
-
-#begin keyboard/keyboard(2).wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:keyboard/keyboard(2).wav
-
 #begin keyboard/keyboard(2).wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -263,18 +222,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:keyboard/keyboard(3).wav
-
-#begin keyboard/keyboard(3).wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:keyboard/keyboard(3).wav
-
-#begin keyboard/keyboard(4).wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:keyboard/keyboard(4).wav
 
 #begin keyboard/keyboard(4).wav
 /importer:WavImporter
@@ -300,18 +247,6 @@
 /processorParam:Quality=Best
 /build:vocal/vocal(1).wav
 
-#begin vocal/vocal(1).wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:vocal/vocal(1).wav
-
-#begin vocal/vocal(2).wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:vocal/vocal(2).wav
-
 #begin vocal/vocal(2).wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -323,18 +258,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:vocal/vocal(3).wav
-
-#begin vocal/vocal(3).wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:vocal/vocal(3).wav
-
-#begin vocal/vocal(4).wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:vocal/vocal(4).wav
 
 #begin vocal/vocal(4).wav
 /importer:WavImporter
