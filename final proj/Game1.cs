@@ -353,11 +353,6 @@ namespace final_proj
             _spriteBatch.Begin();
             _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1079, 600), Color.White);
 
-            //load random song to play and test
-
-            //vocal4Instance.Play();
-            //drum3Instance.Play();
-
             //load the band members
             _spriteBatch.Draw(vocalTexture, vocalRect, Color.White);
             _spriteBatch.Draw(guitarTexture, guitarRect, Color.White);
