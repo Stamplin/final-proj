@@ -78,6 +78,44 @@ namespace final_proj
             isDraggingVocal = false;
 
             base.Initialize();
+
+            //play all sound
+            guitar1Instance.Play();
+            guitar2Instance.Play();
+            guitar3Instance.Play();
+            guitar4Instance.Play();
+            vocal1Instance.Play();
+            vocal2Instance.Play();
+            vocal3Instance.Play();
+            vocal4Instance.Play();
+            drum1Instance.Play();
+            drum2Instance.Play();
+            drum3Instance.Play();
+            drum4Instance.Play();
+            keyboard1Instance.Play();
+            keyboard2Instance.Play();
+            keyboard3Instance.Play();
+            keyboard4Instance.Play();
+           
+
+            //set volume to 0
+            guitar1Instance.Volume = 0;
+            guitar2Instance.Volume = 0;
+            guitar3Instance.Volume = 0;
+            guitar4Instance.Volume = 0;
+            vocal1Instance.Volume = 0;
+            vocal2Instance.Volume = 0;
+            vocal3Instance.Volume = 0;
+            vocal4Instance.Volume = 0;
+            drum1Instance.Volume = 0;
+            drum2Instance.Volume = 0;
+            drum3Instance.Volume = 0;
+            drum4Instance.Volume = 0;
+            keyboard1Instance.Volume = 0;
+            keyboard2Instance.Volume = 0;
+            keyboard3Instance.Volume = 0;
+            keyboard4Instance.Volume = 0;
+
         }
 
         protected override void LoadContent()
@@ -201,120 +239,83 @@ namespace final_proj
             //GUITAR - ON
 
             if (guitarInRect.Intersects(guitarRect)) 
-                guitar1Instance.Play();
+                guitar1Instance.Volume = 1f;
             else if (guitarInRect.Intersects(keyboardRect))
-                guitar2Instance.Play();
+                guitar2Instance.Volume = 1f;
             else if (guitarInRect.Intersects(vocalRect))
-                guitar3Instance.Play();
+                guitar3Instance.Volume = 1f;
             else if (guitarInRect.Intersects(drumRect))
-                guitar4Instance.Play();
+                guitar4Instance.Volume = 1f;
 
             //GUITAR - OFF
             if (!guitarInRect.Intersects(guitarRect))
-                guitar1Instance.Stop();
+                guitar1Instance.Volume = 0f;
             if (!guitarInRect.Intersects(keyboardRect))
-                guitar2Instance.Stop();
+                guitar2Instance.Volume = 0f;
             if (!guitarInRect.Intersects(vocalRect)) 
-                guitar3Instance.Stop();
+                guitar3Instance.Volume = 0f;
             if (!guitarInRect.Intersects(drumRect))
-                guitar4Instance.Stop();
+                guitar4Instance.Volume = 0f;
 
             //MIC - ON
             if (vocalInRect.Intersects(guitarRect))
-                vocal1Instance.Play();
+                vocal1Instance.Volume = 1f;
             else if (vocalInRect.Intersects(keyboardRect))
-                vocal2Instance.Play();
+                vocal2Instance.Volume = 1f;
             else if (vocalInRect.Intersects(vocalRect))
-                vocal3Instance.Play();
+                vocal3Instance.Volume = 1f;
             else if (vocalInRect.Intersects(drumRect))
-                vocal4Instance.Play();
+                vocal4Instance.Volume = 1f;
 
             //MIC - OFF
             if (!vocalInRect.Intersects(guitarRect))
-                vocal1Instance.Stop();
+                vocal1Instance.Volume = 0f;
             if (!vocalInRect.Intersects(keyboardRect))
-                vocal2Instance.Stop();
+                vocal2Instance.Volume = 0f;
             if (!vocalInRect.Intersects(vocalRect))
-                vocal3Instance.Stop();
+                vocal3Instance.Volume = 0f;
             if (!vocalInRect.Intersects(drumRect))
-                vocal4Instance.Stop();
+                vocal4Instance.Volume = 0f;
 
             //DRUM - ON
             if (drumInRect.Intersects(guitarRect))
-                drum1Instance.Play();
+                drum1Instance.Volume = 1f;
             else if (drumInRect.Intersects(keyboardRect))
-                drum2Instance.Play();
+                drum2Instance.Volume = 1f;
             else if (drumInRect.Intersects(vocalRect))
-                drum3Instance.Play();
+                drum3Instance.Volume = 1f;
             else if (drumInRect.Intersects(drumRect))
-                drum4Instance.Play();
+                drum4Instance.Volume = 1f;
 
             //DRUM - OFF
             if (!drumInRect.Intersects(guitarRect))
-                drum1Instance.Stop();
+                drum1Instance.Volume = 0f;
             if (!drumInRect.Intersects(keyboardRect))
-                drum2Instance.Stop();
+                drum2Instance.Volume = 0f;
             if (!drumInRect.Intersects(vocalRect))
-                drum3Instance.Stop();
+                drum3Instance.Volume = 0f;
             if (!drumInRect.Intersects(drumRect))
-                drum4Instance.Stop();
+                drum4Instance.Volume = 0f;
 
             //KEYBOARD - ON
             if (keyboardInRect.Intersects(guitarRect))
-                keyboard1Instance.Play();
+                keyboard1Instance.Volume = 1f;
             else if (keyboardInRect.Intersects(keyboardRect))
-                keyboard2Instance.Play();
+                keyboard2Instance.Volume = 1f;
             else if (keyboardInRect.Intersects(vocalRect))
-                keyboard3Instance.Play();
+                keyboard3Instance.Volume = 1f;
             else if (keyboardInRect.Intersects(drumRect))
-                keyboard4Instance.Play();
+                keyboard4Instance.Volume = 1f;
           
             //KEYBOARD - OFF
             if (!keyboardInRect.Intersects(guitarRect))
-                keyboard1Instance.Stop();
+                keyboard1Instance.Volume = 0f;
             if (!keyboardInRect.Intersects(keyboardRect))
-                keyboard2Instance.Stop();
+                keyboard2Instance.Volume = 0f;
             if (!keyboardInRect.Intersects(vocalRect))
-                keyboard3Instance.Stop();
+                keyboard3Instance.Volume = 0f;
             if (!keyboardInRect.Intersects(drumRect))
-                keyboard4Instance.Stop();
-            
-            ////set volume to 0
-            //guitar1Instance.Volume = 0;
-            //guitar2Instance.Volume = 0;
-            //guitar3Instance.Volume = 0;
-            //guitar4Instance.Volume = 0;
-            //vocal1Instance.Volume = 0;
-            //vocal2Instance.Volume = 0;
-            //vocal3Instance.Volume = 0;
-            //vocal4Instance.Volume = 0;
-            //drum1Instance.Volume = 0;
-            //drum2Instance.Volume = 0;
-            //drum3Instance.Volume = 0;
-            //drum4Instance.Volume = 0;
-            //keyboard1Instance.Volume = 0;
-            //keyboard2Instance.Volume = 0;
-            //keyboard3Instance.Volume = 0;
-            //keyboard4Instance.Volume = 0;
-
-            ////set volume to 100
-            //guitar1Instance.Volume = 1;
-            //guitar2Instance.Volume = 1;
-            //guitar3Instance.Volume = 1;
-            //guitar4Instance.Volume = 1;
-            //vocal1Instance.Volume = 1;
-            //vocal2Instance.Volume = 1;
-            //vocal3Instance.Volume = 1;
-            //vocal4Instance.Volume = 1;
-            //drum1Instance.Volume = 1;
-            //drum2Instance.Volume = 1;
-            //drum3Instance.Volume = 1;
-            //drum4Instance.Volume = 1;
-            //keyboard1Instance.Volume = 1;
-            //keyboard2Instance.Volume = 1;
-            //keyboard3Instance.Volume = 1;
-            //keyboard4Instance.Volume = 1;
-           
+                keyboard4Instance.Volume = 0f;
 
             //================================================================
 
