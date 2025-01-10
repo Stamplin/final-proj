@@ -194,8 +194,129 @@ namespace final_proj
             else if (isDraggingVocal)
                 vocalInRect.Offset(currentMouseState.X - previousMouseState.X, currentMouseState.Y - previousMouseState.Y);
 
- 
+            //================================================================
+
+            //if the instrument touches or over a character it pays a sound based on the instrument and the charater AND MAKE IT STOP PLAYING WHEN IT STOP TOUCHING
             
+            //GUITAR - ON
+
+            if (guitarInRect.Intersects(guitarRect)) 
+                guitar1Instance.Play();
+            else if (guitarInRect.Intersects(keyboardRect))
+                guitar2Instance.Play();
+            else if (guitarInRect.Intersects(vocalRect))
+                guitar3Instance.Play();
+            else if (guitarInRect.Intersects(drumRect))
+                guitar4Instance.Play();
+
+            //GUITAR - OFF
+            if (!guitarInRect.Intersects(guitarRect))
+                guitar1Instance.Stop();
+            if (!guitarInRect.Intersects(keyboardRect))
+                guitar2Instance.Stop();
+            if (!guitarInRect.Intersects(vocalRect)) 
+                guitar3Instance.Stop();
+            if (!guitarInRect.Intersects(drumRect))
+                guitar4Instance.Stop();
+
+            //MIC - ON
+            if (vocalInRect.Intersects(guitarRect))
+                vocal1Instance.Play();
+            else if (vocalInRect.Intersects(keyboardRect))
+                vocal2Instance.Play();
+            else if (vocalInRect.Intersects(vocalRect))
+                vocal3Instance.Play();
+            else if (vocalInRect.Intersects(drumRect))
+                vocal4Instance.Play();
+
+            //MIC - OFF
+            if (!vocalInRect.Intersects(guitarRect))
+                vocal1Instance.Stop();
+            if (!vocalInRect.Intersects(keyboardRect))
+                vocal2Instance.Stop();
+            if (!vocalInRect.Intersects(vocalRect))
+                vocal3Instance.Stop();
+            if (!vocalInRect.Intersects(drumRect))
+                vocal4Instance.Stop();
+
+            //DRUM - ON
+            if (drumInRect.Intersects(guitarRect))
+                drum1Instance.Play();
+            else if (drumInRect.Intersects(keyboardRect))
+                drum2Instance.Play();
+            else if (drumInRect.Intersects(vocalRect))
+                drum3Instance.Play();
+            else if (drumInRect.Intersects(drumRect))
+                drum4Instance.Play();
+
+            //DRUM - OFF
+            if (!drumInRect.Intersects(guitarRect))
+                drum1Instance.Stop();
+            if (!drumInRect.Intersects(keyboardRect))
+                drum2Instance.Stop();
+            if (!drumInRect.Intersects(vocalRect))
+                drum3Instance.Stop();
+            if (!drumInRect.Intersects(drumRect))
+                drum4Instance.Stop();
+
+            //KEYBOARD - ON
+            if (keyboardInRect.Intersects(guitarRect))
+                keyboard1Instance.Play();
+            else if (keyboardInRect.Intersects(keyboardRect))
+                keyboard2Instance.Play();
+            else if (keyboardInRect.Intersects(vocalRect))
+                keyboard3Instance.Play();
+            else if (keyboardInRect.Intersects(drumRect))
+                keyboard4Instance.Play();
+          
+            //KEYBOARD - OFF
+            if (!keyboardInRect.Intersects(guitarRect))
+                keyboard1Instance.Stop();
+            if (!keyboardInRect.Intersects(keyboardRect))
+                keyboard2Instance.Stop();
+            if (!keyboardInRect.Intersects(vocalRect))
+                keyboard3Instance.Stop();
+            if (!keyboardInRect.Intersects(drumRect))
+                keyboard4Instance.Stop();
+            
+            ////set volume to 0
+            //guitar1Instance.Volume = 0;
+            //guitar2Instance.Volume = 0;
+            //guitar3Instance.Volume = 0;
+            //guitar4Instance.Volume = 0;
+            //vocal1Instance.Volume = 0;
+            //vocal2Instance.Volume = 0;
+            //vocal3Instance.Volume = 0;
+            //vocal4Instance.Volume = 0;
+            //drum1Instance.Volume = 0;
+            //drum2Instance.Volume = 0;
+            //drum3Instance.Volume = 0;
+            //drum4Instance.Volume = 0;
+            //keyboard1Instance.Volume = 0;
+            //keyboard2Instance.Volume = 0;
+            //keyboard3Instance.Volume = 0;
+            //keyboard4Instance.Volume = 0;
+
+            ////set volume to 100
+            //guitar1Instance.Volume = 1;
+            //guitar2Instance.Volume = 1;
+            //guitar3Instance.Volume = 1;
+            //guitar4Instance.Volume = 1;
+            //vocal1Instance.Volume = 1;
+            //vocal2Instance.Volume = 1;
+            //vocal3Instance.Volume = 1;
+            //vocal4Instance.Volume = 1;
+            //drum1Instance.Volume = 1;
+            //drum2Instance.Volume = 1;
+            //drum3Instance.Volume = 1;
+            //drum4Instance.Volume = 1;
+            //keyboard1Instance.Volume = 1;
+            //keyboard2Instance.Volume = 1;
+            //keyboard3Instance.Volume = 1;
+            //keyboard4Instance.Volume = 1;
+           
+
+            //================================================================
 
             //load all the sound effects and loop them
             guitar1Instance.IsLooped = true;
@@ -233,8 +354,8 @@ namespace final_proj
 
             //load random song to play and test
 
-            vocal4Instance.Play();
-            drum3Instance.Play();
+            //vocal4Instance.Play();
+            //drum3Instance.Play();
 
             //load the band members
             _spriteBatch.Draw(vocalTexture, vocalRect, Color.White);
