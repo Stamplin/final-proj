@@ -5,7 +5,11 @@ using Microsoft.Xna.Framework.Input;
 
 namespace final_proj
 {
-    public class Game1 : Game
+    public class Game1 : Game 
+        //TODO:
+        //Redo the art and design
+        //Redo the characters hitbox
+        //Make screens
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -48,13 +52,18 @@ namespace final_proj
         Rectangle drumInRect = new Rectangle(550, 180, 60, 60);
         Rectangle vocalInRect = new Rectangle(320, 180, 60, 60);
       
-
-
         //bool is dragging instruments
         bool isDraggingKeyboard, isDraggingGuitar, isDraggingDrum,isDraggingVocal;
 
         //mousestate
         MouseState currentMouseState, previousMouseState;
+
+        //screens intro and game
+        enum Screen
+        {
+            Intro,
+            Game
+        }
 
         public Game1()
         {
@@ -120,6 +129,7 @@ namespace final_proj
 
         protected override void LoadContent()
         {
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
            
             //load images
