@@ -42,16 +42,16 @@ namespace final_proj
         Texture2D drum, guitar, keyboard, vocal;
 
         //rect for charaters
-        Rectangle keyboardRect = new Rectangle(100, 180, 220, 241);
-        Rectangle guitarRect = new Rectangle(750, 180, 220, 241);
-        Rectangle drumRect = new Rectangle(550, 180, 220, 241);
-        Rectangle vocalRect = new Rectangle(320, 180, 220, 241);
+        Rectangle keyboardRect = new Rectangle(100, 180, 130, 130);
+        Rectangle guitarRect = new Rectangle(750, 180, 130, 130);
+        Rectangle drumRect = new Rectangle(550, 180, 100, 100);
+        Rectangle vocalRect = new Rectangle(320, 180, 100, 100);
 
         //rect for instruments
-        Rectangle keyboardInRect = new Rectangle(100, 180, 60, 60);
-        Rectangle guitarInRect = new Rectangle(750, 180, 60, 60);
-        Rectangle drumInRect = new Rectangle(550, 180, 60, 60);
-        Rectangle vocalInRect = new Rectangle(320, 180, 60, 60);
+        Rectangle keyboardInRect = new Rectangle(100, 180, 120, 120);
+        Rectangle guitarInRect = new Rectangle(750, 180, 120, 120);
+        Rectangle drumInRect = new Rectangle(550, 180, 120, 120);
+        Rectangle vocalInRect = new Rectangle(320, 180, 120, 120);
 
         //bool is dragging instruments
         bool isDraggingKeyboard, isDraggingGuitar, isDraggingDrum, isDraggingVocal, isPaused;
@@ -473,7 +473,7 @@ namespace final_proj
             }
             if (screen == Screen.Game)
             {
-                _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White);
+                _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1280, 720), Color.LightGray);
 
                 //load the band members
                 _spriteBatch.Draw(vocalTexture, vocalRect, Color.White);

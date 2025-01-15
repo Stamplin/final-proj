@@ -25,18 +25,6 @@
 /processorParam:TextureFormat=Color
 /build:Background.jpg
 
-#begin Charater/drum/drumDance.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Charater/drum/drumDance.png
-
 #begin Charater/drum/drumNormal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -48,18 +36,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Charater/drum/drumNormal.png
-
-#begin Charater/guitar/guitarDance.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Charater/guitar/guitarDance.png
 
 #begin Charater/guitar/guitarNormal.png
 /importer:TextureImporter
@@ -73,18 +49,6 @@
 /processorParam:TextureFormat=Color
 /build:Charater/guitar/guitarNormal.png
 
-#begin Charater/keyboard/keyDance.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Charater/keyboard/keyDance.png
-
 #begin Charater/keyboard/keyNormal.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -96,18 +60,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Charater/keyboard/keyNormal.png
-
-#begin Charater/vocal/vocalDance.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Charater/vocal/vocalDance.png
 
 #begin Charater/vocal/vocalNormal.png
 /importer:TextureImporter
