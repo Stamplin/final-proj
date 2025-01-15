@@ -14,12 +14,13 @@ namespace final_proj
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
+        KeyboardState keyboardState, prevKeyboardState;
+
         //import background
-        Texture2D backgroundTexture;
+        Texture2D backgroundTexture, introTexture, helpTexture;
 
         //import charaters
         Texture2D keyboardTexture, guitarTexture, drumTexture, vocalTexture;
-        Texture2D keyboardDanceTexture, guitarDanceTexture, drumDanceTexture, vocalDanceTexture;
 
         //drum sound effects imports
         SoundEffect drum1, drum2, drum3, drum4;
@@ -51,9 +52,9 @@ namespace final_proj
         Rectangle guitarInRect = new Rectangle(750, 180, 60, 60);
         Rectangle drumInRect = new Rectangle(550, 180, 60, 60);
         Rectangle vocalInRect = new Rectangle(320, 180, 60, 60);
-      
+
         //bool is dragging instruments
-        bool isDraggingKeyboard, isDraggingGuitar, isDraggingDrum,isDraggingVocal;
+        bool isDraggingKeyboard, isDraggingGuitar, isDraggingDrum, isDraggingVocal, isPaused;
 
         //mousestate
         MouseState currentMouseState, previousMouseState;
@@ -62,8 +63,10 @@ namespace final_proj
         enum Screen
         {
             Intro,
+            Help,
             Game
         }
+        Screen screen;
 
         public Game1()
         {
@@ -76,8 +79,8 @@ namespace final_proj
         {
             // TODO: Add your initialization logic here
 
-            _graphics.PreferredBackBufferHeight = 600;
-            _graphics.PreferredBackBufferWidth = 1079;
+            _graphics.PreferredBackBufferHeight = 720;
+            _graphics.PreferredBackBufferWidth = 1280;
             _graphics.ApplyChanges();
 
             //instruemnt dragging
@@ -125,6 +128,9 @@ namespace final_proj
             keyboard3Instance.Volume = 0;
             keyboard4Instance.Volume = 0;
 
+            //Starter screen
+            screen = Screen.Intro;
+
         }
 
         protected override void LoadContent()
@@ -134,6 +140,8 @@ namespace final_proj
            
             //load images
             backgroundTexture = Content.Load<Texture2D>("Background");
+            introTexture = Content.Load<Texture2D>("Intro");
+            helpTexture = Content.Load<Texture2D>("Help");
             
             //load sound
             guitar1 = Content.Load<SoundEffect>("guitar/guitar(1)");
@@ -145,7 +153,7 @@ namespace final_proj
             guitar3Instance = guitar3.CreateInstance();
             guitar4Instance = guitar4.CreateInstance();
             
-            //load drums
+            //load drums    
             drum1 = Content.Load<SoundEffect>("drums/drum(1)");
             drum2 = Content.Load<SoundEffect>("drums/drum(2)");
             drum3 = Content.Load<SoundEffect>("drums/drum(3)");
@@ -180,11 +188,6 @@ namespace final_proj
             guitarTexture = Content.Load<Texture2D>("Charater/guitar/guitarNormal");
             keyboardTexture = Content.Load<Texture2D>("Charater/keyboard/keyNormal");
             vocalTexture = Content.Load<Texture2D>("Charater/vocal/vocalNormal");
-            //Load Dance Charaters
-            drumDanceTexture = Content.Load<Texture2D>("Charater/drum/drumDance");
-            guitarDanceTexture = Content.Load<Texture2D>("Charater/guitar/guitarDance");
-            keyboardDanceTexture = Content.Load<Texture2D>("Charater/keyboard/keyDance");
-            vocalDanceTexture = Content.Load<Texture2D>("Charater/vocal/vocalDance");
 
             //load instuments
             keyboard = Content.Load<Texture2D>("keyboard");
@@ -206,150 +209,252 @@ namespace final_proj
             //add mouse state update
             previousMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
-            //exit when esc is pressed
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
 
-            //Dragging the instruments anywhere
-            if (NewClick() && guitarInRect.Contains(currentMouseState.Position))
+            prevKeyboardState = keyboardState;
+            keyboardState = Keyboard.GetState();
+
+
+            //screen from intro to help or game screen
+            if (screen == Screen.Intro)
             {
-                isDraggingGuitar = true;
-                this.Window.Title = "clicked";
+                //exit when esc is pressed
+                if (keyboardState.IsKeyDown(Keys.Escape) && prevKeyboardState.IsKeyUp(Keys.Escape))
+                    Exit();
+
+                //go to help screen when h is pressed
+                if (keyboardState.IsKeyDown(Keys.H) && prevKeyboardState.IsKeyUp(Keys.H))
+                {
+                    screen = Screen.Help;
+                }
+
+                //when enter is pressed go to game screen
+                if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                {
+                    screen = Screen.Game;
+                }
             }
-            else if (isDraggingGuitar && currentMouseState.LeftButton == ButtonState.Released)
-                isDraggingGuitar = false;
-            else if (isDraggingGuitar)
-                guitarInRect.Offset(currentMouseState.X - previousMouseState.X, currentMouseState.Y - previousMouseState.Y);
-            
-            if (NewClick() && keyboardInRect.Contains(currentMouseState.Position))
-                isDraggingKeyboard = true;
-            else if (isDraggingKeyboard && currentMouseState.LeftButton == ButtonState.Released)
-                isDraggingKeyboard = false;
-            else if (isDraggingKeyboard)
-                keyboardInRect.Offset(currentMouseState.X - previousMouseState.X, currentMouseState.Y - previousMouseState.Y);
+            else if (screen == Screen.Help)
+            {
+                //go back to home when esc is pressed
+                if (keyboardState.IsKeyDown(Keys.Escape) && prevKeyboardState.IsKeyUp(Keys.Escape))
+                {
+                    screen = Screen.Intro;
+                }
+                //when enter is pressed go to game screen
+                if (keyboardState.IsKeyDown(Keys.Enter) && prevKeyboardState.IsKeyUp(Keys.Enter))
+                {
+                    screen = Screen.Game;
+                }
+            }
+            else if (screen == Screen.Game)
+            {
+                //go back to intro screen when esc is pressed
+                if (keyboardState.IsKeyDown(Keys.Escape) && prevKeyboardState.IsKeyUp(Keys.Escape))
+                {
+                    screen = Screen.Intro;
+                }
 
-            if (NewClick() && drumInRect.Contains(currentMouseState.Position))
-                isDraggingDrum = true;
-            else if (isDraggingDrum && currentMouseState.LeftButton == ButtonState.Released)
-                isDraggingDrum = false;
-            else if (isDraggingDrum)
-                drumInRect.Offset(currentMouseState.X - previousMouseState.X, currentMouseState.Y - previousMouseState.Y);
+                //toggle pause when space is pressed set all volume to zero
+                if (keyboardState.IsKeyDown(Keys.Space) && prevKeyboardState.IsKeyUp(Keys.Space))
+                {
+                    //toggle on off with space bar
+                    isPaused = !isPaused;
 
-            if (NewClick() && vocalInRect.Contains(currentMouseState.Position))
-                isDraggingVocal = true;
-            else if (isDraggingVocal && currentMouseState.LeftButton == ButtonState.Released)
-                isDraggingVocal = false;
-            else if (isDraggingVocal)
-                vocalInRect.Offset(currentMouseState.X - previousMouseState.X, currentMouseState.Y - previousMouseState.Y);
+                    if (isPaused)
+                    {
+                        guitar1Instance.Volume = 0f;
+                        guitar2Instance.Volume = 0f;
+                        guitar3Instance.Volume = 0f;
+                        guitar4Instance.Volume = 0f;
+                        vocal1Instance.Volume = 0f;
+                        vocal2Instance.Volume = 0f;
+                        vocal3Instance.Volume = 0f;
+                        vocal4Instance.Volume = 0f;
+                        drum1Instance.Volume = 0f;
+                        drum2Instance.Volume = 0f;
+                        drum3Instance.Volume = 0f;
+                        drum4Instance.Volume = 0f;
+                        keyboard1Instance.Volume = 0f;
+                        keyboard2Instance.Volume = 0f;
+                        keyboard3Instance.Volume = 0f;
+                        keyboard4Instance.Volume = 0f;
 
-            //================================================================
+                        //and make the drag able instrument un-dragable
+                        isDraggingGuitar = false;
+                        isDraggingKeyboard = false;
+                        isDraggingDrum = false;
+                        isDraggingVocal = false;
+                    }
+                    //reset volume back and set the drag able instrument dragable
+                    else
+                    {
+                        guitar1Instance.Volume = 1f;
+                        guitar2Instance.Volume = 1f;
+                        guitar3Instance.Volume = 1f;
+                        guitar4Instance.Volume = 1f;
+                        vocal1Instance.Volume = 1f;
+                        vocal2Instance.Volume = 1f;
+                        vocal3Instance.Volume = 1f;
+                        vocal4Instance.Volume = 1f;
+                        drum1Instance.Volume = 1f;
+                        drum2Instance.Volume = 1f;
+                        drum3Instance.Volume = 1f;
+                        drum4Instance.Volume = 1f;
+                        keyboard1Instance.Volume = 1f;
+                        keyboard2Instance.Volume = 1f;
+                        keyboard3Instance.Volume = 1f;
+                        keyboard4Instance.Volume = 1f;
 
-            //if the instrument touches or over a character it pays a sound based on the instrument and the charater AND MAKE IT STOP PLAYING WHEN IT STOP TOUCHING
-            
-            //GUITAR - ON
+                        isDraggingGuitar = true;
+                        isDraggingKeyboard = true;
+                        isDraggingDrum = true;
+                        isDraggingVocal = true;
+                    }
 
-            if (guitarInRect.Intersects(guitarRect)) 
-                guitar1Instance.Volume = 1f;
-            else if (guitarInRect.Intersects(keyboardRect))
-                guitar2Instance.Volume = 1f;
-            else if (guitarInRect.Intersects(vocalRect))
-                guitar3Instance.Volume = 1f;
-            else if (guitarInRect.Intersects(drumRect))
-                guitar4Instance.Volume = 1f;
+                }
 
-            //GUITAR - OFF
-            if (!guitarInRect.Intersects(guitarRect))
-                guitar1Instance.Volume = 0f;
-            if (!guitarInRect.Intersects(keyboardRect))
-                guitar2Instance.Volume = 0f;
-            if (!guitarInRect.Intersects(vocalRect)) 
-                guitar3Instance.Volume = 0f;
-            if (!guitarInRect.Intersects(drumRect))
-                guitar4Instance.Volume = 0f;
+                if (!isPaused)
+                {
+                    //Dragging the instruments anywhere
+                    if (NewClick() && guitarInRect.Contains(currentMouseState.Position))
+                    {
+                        isDraggingGuitar = true;
+                    }
+                    else if (isDraggingGuitar && currentMouseState.LeftButton == ButtonState.Released)
+                        isDraggingGuitar = false;
+                    else if (isDraggingGuitar)
+                        guitarInRect.Offset(currentMouseState.X - previousMouseState.X, currentMouseState.Y - previousMouseState.Y);
 
-            //MIC - ON
-            if (vocalInRect.Intersects(guitarRect))
-                vocal1Instance.Volume = 1f;
-            else if (vocalInRect.Intersects(keyboardRect))
-                vocal2Instance.Volume = 1f;
-            else if (vocalInRect.Intersects(vocalRect))
-                vocal3Instance.Volume = 1f;
-            else if (vocalInRect.Intersects(drumRect))
-                vocal4Instance.Volume = 1f;
+                    if (NewClick() && keyboardInRect.Contains(currentMouseState.Position))
+                        isDraggingKeyboard = true;
+                    else if (isDraggingKeyboard && currentMouseState.LeftButton == ButtonState.Released)
+                        isDraggingKeyboard = false;
+                    else if (isDraggingKeyboard)
+                        keyboardInRect.Offset(currentMouseState.X - previousMouseState.X, currentMouseState.Y - previousMouseState.Y);
 
-            //MIC - OFF
-            if (!vocalInRect.Intersects(guitarRect))
-                vocal1Instance.Volume = 0f;
-            if (!vocalInRect.Intersects(keyboardRect))
-                vocal2Instance.Volume = 0f;
-            if (!vocalInRect.Intersects(vocalRect))
-                vocal3Instance.Volume = 0f;
-            if (!vocalInRect.Intersects(drumRect))
-                vocal4Instance.Volume = 0f;
+                    if (NewClick() && drumInRect.Contains(currentMouseState.Position))
+                        isDraggingDrum = true;
+                    else if (isDraggingDrum && currentMouseState.LeftButton == ButtonState.Released)
+                        isDraggingDrum = false;
+                    else if (isDraggingDrum)
+                        drumInRect.Offset(currentMouseState.X - previousMouseState.X, currentMouseState.Y - previousMouseState.Y);
 
-            //DRUM - ON
-            if (drumInRect.Intersects(guitarRect))
-                drum1Instance.Volume = 1f;
-            else if (drumInRect.Intersects(keyboardRect))
-                drum2Instance.Volume = 1f;
-            else if (drumInRect.Intersects(vocalRect))
-                drum3Instance.Volume = 1f;
-            else if (drumInRect.Intersects(drumRect))
-                drum4Instance.Volume = 1f;
+                    if (NewClick() && vocalInRect.Contains(currentMouseState.Position))
+                        isDraggingVocal = true;
+                    else if (isDraggingVocal && currentMouseState.LeftButton == ButtonState.Released)
+                        isDraggingVocal = false;
+                    else if (isDraggingVocal)
+                        vocalInRect.Offset(currentMouseState.X - previousMouseState.X, currentMouseState.Y - previousMouseState.Y);
 
-            //DRUM - OFF
-            if (!drumInRect.Intersects(guitarRect))
-                drum1Instance.Volume = 0f;
-            if (!drumInRect.Intersects(keyboardRect))
-                drum2Instance.Volume = 0f;
-            if (!drumInRect.Intersects(vocalRect))
-                drum3Instance.Volume = 0f;
-            if (!drumInRect.Intersects(drumRect))
-                drum4Instance.Volume = 0f;
+                    //================================================================
 
-            //KEYBOARD - ON
-            if (keyboardInRect.Intersects(guitarRect))
-                keyboard1Instance.Volume = 1f;
-            else if (keyboardInRect.Intersects(keyboardRect))
-                keyboard2Instance.Volume = 1f;
-            else if (keyboardInRect.Intersects(vocalRect))
-                keyboard3Instance.Volume = 1f;
-            else if (keyboardInRect.Intersects(drumRect))
-                keyboard4Instance.Volume = 1f;
-          
-            //KEYBOARD - OFF
-            if (!keyboardInRect.Intersects(guitarRect))
-                keyboard1Instance.Volume = 0f;
-            if (!keyboardInRect.Intersects(keyboardRect))
-                keyboard2Instance.Volume = 0f;
-            if (!keyboardInRect.Intersects(vocalRect))
-                keyboard3Instance.Volume = 0f;
-            if (!keyboardInRect.Intersects(drumRect))
-                keyboard4Instance.Volume = 0f;
+                    //if the instrument touches or over a character it pays a sound based on the instrument and the charater AND MAKE IT STOP PLAYING WHEN IT STOP TOUCHING
 
-            //================================================================
+                    //GUITAR - ON
 
-            //load all the sound effects and loop them
-            guitar1Instance.IsLooped = true;
-            guitar2Instance.IsLooped = true;
-            guitar3Instance.IsLooped = true;
-            guitar4Instance.IsLooped = true;
-            
-            drum1Instance.IsLooped = true;
-            drum2Instance.IsLooped = true;
-            drum3Instance.IsLooped = true;
-            drum4Instance.IsLooped = true;
-            
-            keyboard1Instance.IsLooped = true;
-            keyboard2Instance.IsLooped = true;
-            keyboard3Instance.IsLooped = true;
-            keyboard4Instance.IsLooped = true;
+                    if (guitarInRect.Intersects(guitarRect))
+                        guitar1Instance.Volume = 1f;
+                    else if (guitarInRect.Intersects(keyboardRect))
+                        guitar2Instance.Volume = 1f;
+                    else if (guitarInRect.Intersects(vocalRect))
+                        guitar3Instance.Volume = 1f;
+                    else if (guitarInRect.Intersects(drumRect))
+                        guitar4Instance.Volume = 1f;
 
-            vocal1Instance.IsLooped = true;
-            vocal2Instance.IsLooped = true;
-            vocal3Instance.IsLooped = true;
-            vocal4Instance.IsLooped = true;
+                    //GUITAR - OFF
+                    if (!guitarInRect.Intersects(guitarRect))
+                        guitar1Instance.Volume = 0f;
+                    if (!guitarInRect.Intersects(keyboardRect))
+                        guitar2Instance.Volume = 0f;
+                    if (!guitarInRect.Intersects(vocalRect))
+                        guitar3Instance.Volume = 0f;
+                    if (!guitarInRect.Intersects(drumRect))
+                        guitar4Instance.Volume = 0f;
 
+                    //MIC - ON
+                    if (vocalInRect.Intersects(guitarRect))
+                        vocal1Instance.Volume = 1f;
+                    else if (vocalInRect.Intersects(keyboardRect))
+                        vocal2Instance.Volume = 1f;
+                    else if (vocalInRect.Intersects(vocalRect))
+                        vocal3Instance.Volume = 1f;
+                    else if (vocalInRect.Intersects(drumRect))
+                        vocal4Instance.Volume = 1f;
+
+                    //MIC - OFF
+                    if (!vocalInRect.Intersects(guitarRect))
+                        vocal1Instance.Volume = 0f;
+                    if (!vocalInRect.Intersects(keyboardRect))
+                        vocal2Instance.Volume = 0f;
+                    if (!vocalInRect.Intersects(vocalRect))
+                        vocal3Instance.Volume = 0f;
+                    if (!vocalInRect.Intersects(drumRect))
+                        vocal4Instance.Volume = 0f;
+
+                    //DRUM - ON
+                    if (drumInRect.Intersects(guitarRect))
+                        drum1Instance.Volume = 1f;
+                    else if (drumInRect.Intersects(keyboardRect))
+                        drum2Instance.Volume = 1f;
+                    else if (drumInRect.Intersects(vocalRect))
+                        drum3Instance.Volume = 1f;
+                    else if (drumInRect.Intersects(drumRect))
+                        drum4Instance.Volume = 1f;
+
+                    //DRUM - OFF
+                    if (!drumInRect.Intersects(guitarRect))
+                        drum1Instance.Volume = 0f;
+                    if (!drumInRect.Intersects(keyboardRect))
+                        drum2Instance.Volume = 0f;
+                    if (!drumInRect.Intersects(vocalRect))
+                        drum3Instance.Volume = 0f;
+                    if (!drumInRect.Intersects(drumRect))
+                        drum4Instance.Volume = 0f;
+
+                    //KEYBOARD - ON
+                    if (keyboardInRect.Intersects(guitarRect))
+                        keyboard1Instance.Volume = 1f;
+                    else if (keyboardInRect.Intersects(keyboardRect))
+                        keyboard2Instance.Volume = 1f;
+                    else if (keyboardInRect.Intersects(vocalRect))
+                        keyboard3Instance.Volume = 1f;
+                    else if (keyboardInRect.Intersects(drumRect))
+                        keyboard4Instance.Volume = 1f;
+
+                    //KEYBOARD - OFF
+                    if (!keyboardInRect.Intersects(guitarRect))
+                        keyboard1Instance.Volume = 0f;
+                    if (!keyboardInRect.Intersects(keyboardRect))
+                        keyboard2Instance.Volume = 0f;
+                    if (!keyboardInRect.Intersects(vocalRect))
+                        keyboard3Instance.Volume = 0f;
+                    if (!keyboardInRect.Intersects(drumRect))
+                        keyboard4Instance.Volume = 0f;
+
+                    //================================================================
+
+                    //load all the sound effects and loop them
+                    guitar1Instance.IsLooped = true;
+                    guitar2Instance.IsLooped = true;
+                    guitar3Instance.IsLooped = true;
+                    guitar4Instance.IsLooped = true;
+
+                    drum1Instance.IsLooped = true;
+                    drum2Instance.IsLooped = true;
+                    drum3Instance.IsLooped = true;
+                    drum4Instance.IsLooped = true;
+
+                    keyboard1Instance.IsLooped = true;
+                    keyboard2Instance.IsLooped = true;
+                    keyboard3Instance.IsLooped = true;
+                    keyboard4Instance.IsLooped = true;
+
+                    vocal1Instance.IsLooped = true;
+                    vocal2Instance.IsLooped = true;
+                    vocal3Instance.IsLooped = true;
+                    vocal4Instance.IsLooped = true;
+                }
+            }
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -361,19 +466,32 @@ namespace final_proj
             SpriteBatch spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _spriteBatch.Begin();
-            _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1079, 600), Color.White);
 
-            //load the band members
-            _spriteBatch.Draw(vocalTexture, vocalRect, Color.White);
-            _spriteBatch.Draw(guitarTexture, guitarRect, Color.White);
-            _spriteBatch.Draw(drumTexture, drumRect, Color.White);
-            _spriteBatch.Draw(keyboardTexture, keyboardRect, Color.White);
+            if (screen == Screen.Intro)
+            {
+                _spriteBatch.Draw(introTexture, new Rectangle(0, 0, 1280, 720), Color.White);
+            }
+            if (screen == Screen.Game)
+            {
+                _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1280, 720), Color.White);
 
-            //load insturments
-            _spriteBatch.Draw(vocal, vocalInRect, Color.White);
-            _spriteBatch.Draw(guitar, guitarInRect, Color.White);
-            _spriteBatch.Draw(drum, drumInRect, Color.White);
-            _spriteBatch.Draw(keyboard, keyboardInRect, Color.White);
+                //load the band members
+                _spriteBatch.Draw(vocalTexture, vocalRect, Color.White);
+                _spriteBatch.Draw(guitarTexture, guitarRect, Color.White);
+                _spriteBatch.Draw(drumTexture, drumRect, Color.White);
+                _spriteBatch.Draw(keyboardTexture, keyboardRect, Color.White);
+
+                //load insturments
+                _spriteBatch.Draw(vocal, vocalInRect, Color.White);
+                _spriteBatch.Draw(guitar, guitarInRect, Color.White);
+                _spriteBatch.Draw(drum, drumInRect, Color.White);
+                _spriteBatch.Draw(keyboard, keyboardInRect, Color.White);
+            }
+            if (screen == Screen.Help)
+            {
+                _spriteBatch.Draw(helpTexture, new Rectangle(0, 0, 1280, 720), Color.White);
+            }
+           
             
             // TODO: Add your drawing code here
 
