@@ -57,6 +57,9 @@ namespace final_proj
         //bool is dragging instruments
         bool isDraggingKeyboard, isDraggingGuitar, isDraggingDrum, isDraggingVocal, isPaused;
 
+        bool guitarOn, drumOn, keyboardOn, vocalOn;
+
+
         //mousestate
         MouseState currentMouseState, previousMouseState;
 
@@ -64,7 +67,7 @@ namespace final_proj
         SoundEffect menuMusic;
         SoundEffectInstance menuMusicInstance;
         
-        float x, y;
+        float x, y, seconds;
 
 
         //screens intro and game
@@ -98,6 +101,9 @@ namespace final_proj
             isDraggingVocal = false;
 
             base.Initialize();
+
+            seconds = 0f;
+            
 
             //play all sound
             guitar1Instance.Play();
@@ -268,8 +274,12 @@ namespace final_proj
             }
             else if (screen == Screen.Game)
             {
-                y = (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds) * 10;
-                x = (float)Math.Cos(gameTime.TotalGameTime.TotalSeconds) * 5;
+                if((guitarOn || drumOn || keyboardOn || vocalOn) && !isPaused)
+                {
+                    seconds += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                }
+                y = (float)Math.Sin(seconds) * 10;
+                x = (float)Math.Cos(seconds) * 5;
 
                 menuMusicInstance.Volume = 0f;
                 //go back to intro screen when esc is pressed
@@ -277,7 +287,15 @@ namespace final_proj
                 {
                     screen = Screen.Intro;
                 }
+                //make if "r" is pressed then reset the position of the instruments
+                if (keyboardState.IsKeyDown(Keys.R) && prevKeyboardState.IsKeyUp(Keys.R))
+                {
 
+                    keyboardInRect.Location = new Point(900, 180);
+                    guitarInRect = new Rectangle(290, 180, 120, 120);
+                    drumInRect = new Rectangle(480, 180, 120, 120);
+                    vocalInRect = new Rectangle(690, 180, 100, 100);
+                }   
                 //toggle pause when space is pressed set all volume to zero
                 if (keyboardState.IsKeyDown(Keys.Space) && prevKeyboardState.IsKeyUp(Keys.Space))
                 {
@@ -375,15 +393,29 @@ namespace final_proj
                     //if the instrument touches or over a character it pays a sound based on the instrument and the charater AND MAKE IT STOP PLAYING WHEN IT STOP TOUCHING
 
                     //GUITAR - ON
-
+                    guitarOn = false;
                     if (guitarInRect.Intersects(guitarRect))
+                    {
                         guitar1Instance.Volume = 1f;
+                        guitarOn = true;
+                    }
                     else if (guitarInRect.Intersects(keyboardRect))
+                    {
                         guitar2Instance.Volume = 1f;
+                        guitarOn = true;
+                    }
                     else if (guitarInRect.Intersects(vocalRect))
+                    {
                         guitar3Instance.Volume = 1f;
+                        guitarOn = true;
+                    }
                     else if (guitarInRect.Intersects(drumRect))
+                    {
                         guitar4Instance.Volume = 1f;
+                        guitarOn = true;
+                    }
+                    else 
+                        guitarOn = false;
 
                     //GUITAR - OFF
                     if (!guitarInRect.Intersects(guitarRect))
@@ -396,14 +428,28 @@ namespace final_proj
                         guitar4Instance.Volume = 0f;
 
                     //MIC - ON
+                    vocalOn = false;
                     if (vocalInRect.Intersects(guitarRect))
+                    {
                         vocal1Instance.Volume = 1f;
+                        vocalOn = true;
+                    }
                     else if (vocalInRect.Intersects(keyboardRect))
+                    {
                         vocal2Instance.Volume = 1f;
+                        vocalOn = true;
+                    }
                     else if (vocalInRect.Intersects(vocalRect))
+                    {
                         vocal3Instance.Volume = 1f;
+                        vocalOn = true;
+                    }
                     else if (vocalInRect.Intersects(drumRect))
+                    {
                         vocal4Instance.Volume = 1f;
+                        vocalOn = true;
+                    }
+                    else vocalOn = false;
 
                     //MIC - OFF
                     if (!vocalInRect.Intersects(guitarRect))
@@ -416,14 +462,28 @@ namespace final_proj
                         vocal4Instance.Volume = 0f;
 
                     //DRUM - ON
+                    drumOn = false;
                     if (drumInRect.Intersects(guitarRect))
+                    {
                         drum1Instance.Volume = 1f;
+                        vocalOn = true;
+                    }
                     else if (drumInRect.Intersects(keyboardRect))
+                    {
                         drum2Instance.Volume = 1f;
+                        vocalOn = true;
+                    }
                     else if (drumInRect.Intersects(vocalRect))
+                    {
                         drum3Instance.Volume = 1f;
+                        vocalOn = true;
+                    }
                     else if (drumInRect.Intersects(drumRect))
+                    {
                         drum4Instance.Volume = 1f;
+                        vocalOn = true;
+                    }
+                    else drumOn = false;
 
                     //DRUM - OFF
                     if (!drumInRect.Intersects(guitarRect))
@@ -436,14 +496,28 @@ namespace final_proj
                         drum4Instance.Volume = 0f;
 
                     //KEYBOARD - ON
+                    keyboardOn = false;
                     if (keyboardInRect.Intersects(guitarRect))
+                    {
                         keyboard1Instance.Volume = 1f;
+                        vocalOn = true;
+                    }
                     else if (keyboardInRect.Intersects(keyboardRect))
-                        keyboard2Instance.Volume = 1f;
+                    {
+                        keyboard1Instance.Volume = 1f;
+                        vocalOn = true;
+                    }
                     else if (keyboardInRect.Intersects(vocalRect))
-                        keyboard3Instance.Volume = 1f;
+                    {
+                        keyboard1Instance.Volume = 1f;
+                        vocalOn = true;
+                    }
                     else if (keyboardInRect.Intersects(drumRect))
-                        keyboard4Instance.Volume = 1f;
+                    {
+                        keyboard1Instance.Volume = 1f;
+                        vocalOn = true;
+                    }
+                    else keyboardOn = false;
 
                     //KEYBOARD - OFF
                     if (!keyboardInRect.Intersects(guitarRect))
@@ -501,7 +575,7 @@ namespace final_proj
             {
                 _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1280, 720), Color.LightGray);
 
-                //load the band members
+                //draw the band members
                 _spriteBatch.Draw(vocalTexture, vocalRect, Color.White);
                 _spriteBatch.Draw(guitarTexture, guitarRect, Color.White);
                 _spriteBatch.Draw(drumTexture, drumRect, Color.White);
