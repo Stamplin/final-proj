@@ -73,6 +73,18 @@
 /processorParam:TextureFormat=Color
 /build:Charater/vocal/vocalNormal.png
 
+#begin crowd.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:crowd.png
+
 #begin drum.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -204,6 +216,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:keyboard/keyboard(4).wav
+
+#begin menu.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:menu.wav
 
 #begin mic.png
 /importer:TextureImporter

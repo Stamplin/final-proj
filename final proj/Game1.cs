@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace final_proj
 {
@@ -17,7 +18,7 @@ namespace final_proj
         KeyboardState keyboardState, prevKeyboardState;
 
         //import background
-        Texture2D backgroundTexture, introTexture, helpTexture;
+        Texture2D backgroundTexture, introTexture, helpTexture, crowdTexture;
 
         //import charaters
         Texture2D keyboardTexture, guitarTexture, drumTexture, vocalTexture;
@@ -42,22 +43,29 @@ namespace final_proj
         Texture2D drum, guitar, keyboard, vocal;
 
         //rect for charaters
-        Rectangle keyboardRect = new Rectangle(100, 180, 130, 130);
-        Rectangle guitarRect = new Rectangle(750, 180, 130, 130);
-        Rectangle drumRect = new Rectangle(550, 180, 100, 100);
-        Rectangle vocalRect = new Rectangle(320, 180, 100, 100);
+        Rectangle keyboardRect = new Rectangle(900, 430, 130, 130);//purple
+        Rectangle guitarRect = new Rectangle(290, 430, 130, 130);//cheeky
+        Rectangle drumRect = new Rectangle(690, 370, 130, 130); //sunglasses
+        Rectangle vocalRect = new Rectangle(480, 370, 130, 130); //red
 
         //rect for instruments
-        Rectangle keyboardInRect = new Rectangle(100, 180, 120, 120);
-        Rectangle guitarInRect = new Rectangle(750, 180, 120, 120);
-        Rectangle drumInRect = new Rectangle(550, 180, 120, 120);
-        Rectangle vocalInRect = new Rectangle(320, 180, 120, 120);
+        Rectangle keyboardInRect = new Rectangle(900, 180, 120, 120);
+        Rectangle guitarInRect = new Rectangle(290, 180, 120, 120);
+        Rectangle drumInRect = new Rectangle(480, 180, 120, 120);
+        Rectangle vocalInRect = new Rectangle(690, 180, 100, 100);
 
         //bool is dragging instruments
         bool isDraggingKeyboard, isDraggingGuitar, isDraggingDrum, isDraggingVocal, isPaused;
 
         //mousestate
         MouseState currentMouseState, previousMouseState;
+
+        //import menu music
+        SoundEffect menuMusic;
+        SoundEffectInstance menuMusicInstance;
+        
+        float x, y;
+
 
         //screens intro and game
         enum Screen
@@ -108,6 +116,7 @@ namespace final_proj
             keyboard2Instance.Play();
             keyboard3Instance.Play();
             keyboard4Instance.Play();
+            menuMusicInstance.Play();
            
 
             //set volume to 0
@@ -127,6 +136,7 @@ namespace final_proj
             keyboard2Instance.Volume = 0;
             keyboard3Instance.Volume = 0;
             keyboard4Instance.Volume = 0;
+            menuMusicInstance.Volume = 0;
 
             //Starter screen
             screen = Screen.Intro;
@@ -142,6 +152,7 @@ namespace final_proj
             backgroundTexture = Content.Load<Texture2D>("Background");
             introTexture = Content.Load<Texture2D>("Intro");
             helpTexture = Content.Load<Texture2D>("Help");
+            crowdTexture = Content.Load<Texture2D>("Crowd");
             
             //load sound
             guitar1 = Content.Load<SoundEffect>("guitar/guitar(1)");
@@ -183,6 +194,10 @@ namespace final_proj
             vocal3Instance = vocal3.CreateInstance();
             vocal4Instance = vocal4.CreateInstance();
 
+            //load menu 
+            menuMusic = Content.Load<SoundEffect>("menu");
+            menuMusicInstance = menuMusic.CreateInstance();
+
             //Load Charaters
             drumTexture = Content.Load<Texture2D>("Charater/drum/drumNormal");
             guitarTexture = Content.Load<Texture2D>("Charater/guitar/guitarNormal");
@@ -217,6 +232,8 @@ namespace final_proj
             //screen from intro to help or game screen
             if (screen == Screen.Intro)
             {
+                menuMusicInstance.IsLooped = true;
+                menuMusicInstance.Volume = 1f;
                 //exit when esc is pressed
                 if (keyboardState.IsKeyDown(Keys.Escape) && prevKeyboardState.IsKeyUp(Keys.Escape))
                     Exit();
@@ -232,9 +249,12 @@ namespace final_proj
                 {
                     screen = Screen.Game;
                 }
+
             }
             else if (screen == Screen.Help)
             {
+                menuMusicInstance.IsLooped = true;
+                menuMusicInstance.Volume = 1f;
                 //go back to home when esc is pressed
                 if (keyboardState.IsKeyDown(Keys.Escape) && prevKeyboardState.IsKeyUp(Keys.Escape))
                 {
@@ -248,6 +268,10 @@ namespace final_proj
             }
             else if (screen == Screen.Game)
             {
+                y = (float)Math.Sin(gameTime.TotalGameTime.TotalSeconds) * 10;
+                x = (float)Math.Cos(gameTime.TotalGameTime.TotalSeconds) * 5;
+
+                menuMusicInstance.Volume = 0f;
                 //go back to intro screen when esc is pressed
                 if (keyboardState.IsKeyDown(Keys.Escape) && prevKeyboardState.IsKeyUp(Keys.Escape))
                 {
@@ -453,6 +477,8 @@ namespace final_proj
                     vocal2Instance.IsLooped = true;
                     vocal3Instance.IsLooped = true;
                     vocal4Instance.IsLooped = true;
+
+                    
                 }
             }
             // TODO: Add your update logic here
@@ -486,6 +512,9 @@ namespace final_proj
                 _spriteBatch.Draw(guitar, guitarInRect, Color.White);
                 _spriteBatch.Draw(drum, drumInRect, Color.White);
                 _spriteBatch.Draw(keyboard, keyboardInRect, Color.White);
+
+                //load crowd
+                _spriteBatch.Draw(crowdTexture, new Rectangle(new Vector2(x, y).ToPoint(), new Point(1280, 750)), Color.White);
             }
             if (screen == Screen.Help)
             {
