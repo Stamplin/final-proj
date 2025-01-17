@@ -18,7 +18,7 @@ namespace final_proj
         KeyboardState keyboardState, prevKeyboardState;
 
         //import background
-        Texture2D backgroundTexture, introTexture, helpTexture, crowdTexture;
+        Texture2D backgroundTexture, introTexture, helpTexture, crowdTexture, pausedOverlayTexture;
 
         //import charaters
         Texture2D keyboardTexture, guitarTexture, drumTexture, vocalTexture;
@@ -59,6 +59,12 @@ namespace final_proj
 
         bool guitarOn, drumOn, keyboardOn, vocalOn;
 
+        //float for opacity for charaters when they active or not
+        //default opacity is 80
+        float keyboardOpacity = 0.8f;
+        float guitarOpacity = 0.8f;
+        float drumOpacity = 0.8f;
+        float vocalOpacity = 0.8f;
 
         //mousestate
         MouseState currentMouseState, previousMouseState;
@@ -216,6 +222,13 @@ namespace final_proj
             drum = Content.Load<Texture2D>("drum");
             vocal = Content.Load<Texture2D>("mic");
 
+            // Load the paused overlay texture
+            pausedOverlayTexture = new Texture2D(GraphicsDevice, 1, 1);
+            pausedOverlayTexture.SetData(new[] { Color.White });
+
+            // Adjust transparency
+            pausedOverlayTexture.SetData(new[] { new Color(0, 0, 0, 128) });
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -326,6 +339,8 @@ namespace final_proj
                         isDraggingKeyboard = false;
                         isDraggingDrum = false;
                         isDraggingVocal = false;
+
+
                     }
                     //reset volume back and set the drag able instrument dragable
                     else
@@ -392,40 +407,56 @@ namespace final_proj
 
                     //if the instrument touches or over a character it pays a sound based on the instrument and the charater AND MAKE IT STOP PLAYING WHEN IT STOP TOUCHING
 
+                    // Reset all opacities to the default value
+                    keyboardOpacity = 0.8f;
+                    guitarOpacity = 0.8f;
+                    drumOpacity = 0.8f;
+                    vocalOpacity = 0.8f;
+
                     //GUITAR - ON
                     guitarOn = false;
                     if (guitarInRect.Intersects(guitarRect))
                     {
                         guitar1Instance.Volume = 1f;
                         guitarOn = true;
+                        guitarOpacity = 1.0f; // 100%
                     }
                     else if (guitarInRect.Intersects(keyboardRect))
                     {
                         guitar2Instance.Volume = 1f;
                         guitarOn = true;
+                        keyboardOpacity = 1.0f; // 100%
                     }
                     else if (guitarInRect.Intersects(vocalRect))
                     {
                         guitar3Instance.Volume = 1f;
                         guitarOn = true;
+                        vocalOpacity = 1.0f; // 100%
                     }
                     else if (guitarInRect.Intersects(drumRect))
                     {
                         guitar4Instance.Volume = 1f;
                         guitarOn = true;
+                        drumOpacity = 1.0f; // 100%
                     }
-                    else 
-                        guitarOn = false;
 
                     //GUITAR - OFF
                     if (!guitarInRect.Intersects(guitarRect))
+                    {
                         guitar1Instance.Volume = 0f;
+                    }
                     if (!guitarInRect.Intersects(keyboardRect))
+                    {
                         guitar2Instance.Volume = 0f;
+                    }
                     if (!guitarInRect.Intersects(vocalRect))
+                    {
                         guitar3Instance.Volume = 0f;
+                    }
                     if (!guitarInRect.Intersects(drumRect))
+                    {
                         guitar4Instance.Volume = 0f;
+                    }
 
                     //MIC - ON
                     vocalOn = false;
@@ -433,101 +464,134 @@ namespace final_proj
                     {
                         vocal1Instance.Volume = 1f;
                         vocalOn = true;
+                        guitarOpacity = 1.0f; // 100%
                     }
                     else if (vocalInRect.Intersects(keyboardRect))
                     {
                         vocal2Instance.Volume = 1f;
                         vocalOn = true;
+                        keyboardOpacity = 1.0f; // 100%
                     }
                     else if (vocalInRect.Intersects(vocalRect))
                     {
                         vocal3Instance.Volume = 1f;
                         vocalOn = true;
+                        vocalOpacity = 1.0f; // 100%
                     }
                     else if (vocalInRect.Intersects(drumRect))
                     {
                         vocal4Instance.Volume = 1f;
                         vocalOn = true;
+                        drumOpacity = 1.0f; // 100%
                     }
-                    else vocalOn = false;
 
                     //MIC - OFF
                     if (!vocalInRect.Intersects(guitarRect))
+                    {
                         vocal1Instance.Volume = 0f;
+                    }
                     if (!vocalInRect.Intersects(keyboardRect))
+                    {
                         vocal2Instance.Volume = 0f;
+                    }
                     if (!vocalInRect.Intersects(vocalRect))
+                    {
                         vocal3Instance.Volume = 0f;
+                    }
                     if (!vocalInRect.Intersects(drumRect))
+                    {
                         vocal4Instance.Volume = 0f;
+                    }
 
                     //DRUM - ON
                     drumOn = false;
                     if (drumInRect.Intersects(guitarRect))
                     {
                         drum1Instance.Volume = 1f;
-                        vocalOn = true;
+                        drumOn = true;
+                        guitarOpacity = 1.0f; // 100%
                     }
                     else if (drumInRect.Intersects(keyboardRect))
                     {
                         drum2Instance.Volume = 1f;
-                        vocalOn = true;
+                        drumOn = true;
+                        keyboardOpacity = 1.0f; // 100%
                     }
                     else if (drumInRect.Intersects(vocalRect))
                     {
                         drum3Instance.Volume = 1f;
-                        vocalOn = true;
+                        drumOn = true;
+                        vocalOpacity = 1.0f; // 100%
                     }
                     else if (drumInRect.Intersects(drumRect))
                     {
                         drum4Instance.Volume = 1f;
-                        vocalOn = true;
+                        drumOn = true;
+                        drumOpacity = 1.0f; // 100%
                     }
-                    else drumOn = false;
 
                     //DRUM - OFF
                     if (!drumInRect.Intersects(guitarRect))
+                    {
                         drum1Instance.Volume = 0f;
+                    }
                     if (!drumInRect.Intersects(keyboardRect))
+                    {
                         drum2Instance.Volume = 0f;
+                    }
                     if (!drumInRect.Intersects(vocalRect))
+                    {
                         drum3Instance.Volume = 0f;
+                    }
                     if (!drumInRect.Intersects(drumRect))
+                    {
                         drum4Instance.Volume = 0f;
+                    }
 
                     //KEYBOARD - ON
                     keyboardOn = false;
                     if (keyboardInRect.Intersects(guitarRect))
                     {
                         keyboard1Instance.Volume = 1f;
-                        vocalOn = true;
+                        keyboardOn = true;
+                        guitarOpacity = 1.0f; // 100%
                     }
                     else if (keyboardInRect.Intersects(keyboardRect))
                     {
-                        keyboard1Instance.Volume = 1f;
-                        vocalOn = true;
+                        keyboard2Instance.Volume = 1f;
+                        keyboardOn = true;
+                        keyboardOpacity = 1.0f; // 100%
                     }
                     else if (keyboardInRect.Intersects(vocalRect))
                     {
-                        keyboard1Instance.Volume = 1f;
-                        vocalOn = true;
+                        keyboard3Instance.Volume = 1f;
+                        keyboardOn = true;
+                        vocalOpacity = 1.0f; // 100%
                     }
                     else if (keyboardInRect.Intersects(drumRect))
                     {
-                        keyboard1Instance.Volume = 1f;
-                        vocalOn = true;
+                        keyboard4Instance.Volume = 1f;
+                        keyboardOn = true;
+                        drumOpacity = 1.0f; // 100%
                     }
-                    else keyboardOn = false;
 
                     //KEYBOARD - OFF
                     if (!keyboardInRect.Intersects(guitarRect))
+                    {
                         keyboard1Instance.Volume = 0f;
+                    }
                     if (!keyboardInRect.Intersects(keyboardRect))
+                    {
                         keyboard2Instance.Volume = 0f;
+                    }
                     if (!keyboardInRect.Intersects(vocalRect))
+                    {
                         keyboard3Instance.Volume = 0f;
+                    }
                     if (!keyboardInRect.Intersects(drumRect))
+                    {
                         keyboard4Instance.Volume = 0f;
+                    }
 
                     //================================================================
 
@@ -576,10 +640,11 @@ namespace final_proj
                 _spriteBatch.Draw(backgroundTexture, new Rectangle(0, 0, 1280, 720), Color.LightGray);
 
                 //draw the band members
-                _spriteBatch.Draw(vocalTexture, vocalRect, Color.White);
-                _spriteBatch.Draw(guitarTexture, guitarRect, Color.White);
-                _spriteBatch.Draw(drumTexture, drumRect, Color.White);
-                _spriteBatch.Draw(keyboardTexture, keyboardRect, Color.White);
+                //opacity added to know if they are active or not
+                _spriteBatch.Draw(vocalTexture, vocalRect, Color.White * vocalOpacity);
+                _spriteBatch.Draw(guitarTexture, guitarRect, Color.White * guitarOpacity);
+                _spriteBatch.Draw(drumTexture, drumRect, Color.White * drumOpacity);
+                _spriteBatch.Draw(keyboardTexture, keyboardRect, Color.White * keyboardOpacity);
 
                 //load insturments
                 _spriteBatch.Draw(vocal, vocalInRect, Color.White);
@@ -589,6 +654,15 @@ namespace final_proj
 
                 //load crowd
                 _spriteBatch.Draw(crowdTexture, new Rectangle(new Vector2(x, y).ToPoint(), new Point(1280, 750)), Color.White);
+
+
+               //pause overlay
+                if (isPaused)
+                {
+                    _spriteBatch.Draw(pausedOverlayTexture, new Rectangle(0, 0, 1280, 720), Color.Black * 0.9f);
+                }
+
+                
             }
             if (screen == Screen.Help)
             {
