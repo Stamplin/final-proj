@@ -26,6 +26,7 @@
     <None Remove="Content\drum%282%29.wav" />
     <None Remove="Content\drum%283%29.wav" />
     <None Remove="Content\drum%284%29.wav" />
+    <None Remove="Content\Help.png" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
   </ItemGroup>

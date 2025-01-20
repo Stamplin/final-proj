@@ -157,7 +157,7 @@
 /processorParam:Quality=Best
 /build:guitar/guitar(4).wav
 
-#begin Help.png
+#begin Help.jpg
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -167,7 +167,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Help.png
+/build:Help.jpg
 
 #begin Intro.jpg
 /importer:TextureImporter
