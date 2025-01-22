@@ -52,7 +52,7 @@ namespace final_proj
         Rectangle keyboardInRect = new Rectangle(900, 180, 118, 42);
         Rectangle guitarInRect = new Rectangle(290, 180, 134, 52);
         Rectangle drumInRect = new Rectangle(480, 180, 118, 44);
-        Rectangle vocalInRect = new Rectangle(690, 180, 42, 116);
+        Rectangle vocalInRect = new Rectangle(735, 180, 35, 95);
 
         //bool is dragging instruments
         bool isDraggingKeyboard, isDraggingGuitar, isDraggingDrum, isDraggingVocal, isPaused;
