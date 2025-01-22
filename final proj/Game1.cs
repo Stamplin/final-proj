@@ -304,10 +304,10 @@ namespace final_proj
                 if (keyboardState.IsKeyDown(Keys.R) && prevKeyboardState.IsKeyUp(Keys.R))
                 {
 
-                    keyboardInRect.Location = new Point(900, 180);
-                    guitarInRect = new Rectangle(290, 180, 120, 120);
-                    drumInRect = new Rectangle(480, 180, 120, 120);
-                    vocalInRect = new Rectangle(690, 180, 100, 100);
+                     keyboardInRect = new Rectangle(900, 180, 118, 42);
+                     guitarInRect = new Rectangle(290, 180, 134, 52);
+                     drumInRect = new Rectangle(480, 180, 118, 44);
+                     vocalInRect = new Rectangle(735, 180, 35, 95);
                 }   
                 //toggle pause when space is pressed set all volume to zero
                 if (keyboardState.IsKeyDown(Keys.Space) && prevKeyboardState.IsKeyUp(Keys.Space))
